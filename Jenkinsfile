@@ -71,15 +71,6 @@ pipeline {
          //sh 'kubectl --kubeconfig=$KUBECONFIG apply -f your-deployment.yaml'
          sh 'kubectl get no'
          sh 'kubectl version -o json'
-         sh 'pipeline {
-  agent any
-  stages {
-    stage('Docker Build') {
-      steps {
-        sh 'echo Docker Build'
-        //sh "docker build -t kmlaydin/podinfo:${env.BUILD_NUMBER} ."
-      }
-    }
     stage('Docker Push') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
