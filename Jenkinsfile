@@ -27,7 +27,7 @@ pipeline {
           withKubeConfig([credentialsId: 'JENKINS-CONNECT-TO-REMOTE-K8S']) {
           sh 'echo Apply Kubernetes Files'
           //sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
-          //sh 'kubectl apply -f service.yaml'
+          // //sh 'kubectl apply -f service.yaml'
         }
       }
    }
