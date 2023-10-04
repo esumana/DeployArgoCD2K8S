@@ -42,6 +42,7 @@ pipeline {
          //sh 'kubectl --kubeconfig=$KUBECONFIG apply -f your-deployment.yaml'
          sh 'kubectl get no'
          sh 'kubectl version -o json'
+         sh 'kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml'
          sh 'kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -'
          sh 'kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml'
          sh 'kubectl get pods -n argocd'
@@ -50,12 +51,12 @@ pipeline {
        }
      }
     }
-   stage("Portforwarding") {
-     steps {
-       sh "echo Portforwarding..."
-       sh 'echo monza1 | sudo kubectl port-forward -n argocd service/argocd-server 443:443'
-     }
-   }
+   //stage("Portforwarding") {
+   //  steps {
+   //    sh "echo Portforwarding..."
+   //    sh 'echo monza1 | sudo kubectl port-forward -n argocd service/argocd-server 443:443'
+   //  }
+   //}
   }
 //post {
 //    success {
