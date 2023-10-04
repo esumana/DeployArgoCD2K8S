@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.ekong.xyz:443
+  - host: argocd.ekong.xyz
     http:
       paths:
       - path: /
