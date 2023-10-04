@@ -47,10 +47,15 @@ pipeline {
          sh 'kubectl get pods -n argocd'
          sh 'kubectl apply -f argocd-nginx-ingress.yaml'
          //sh 'kubectl delete -f argocd-nginx-ingress.yaml'
-         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo -S kubectl port-forward -n argocd service/argocd-server 443:443'
        }
      }
     }
+   stage("Portforwarding") {
+     steps {
+       sh "echo Portforwarding..."
+       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo -S kubectl port-forward -n argocd service/argocd-server 443:443'
+     }
+   }
   }
 //post {
 //    success {
