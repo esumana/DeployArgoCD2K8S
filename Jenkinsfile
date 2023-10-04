@@ -39,7 +39,7 @@ pipeline {
          //sh 'kubectl --kubeconfig=$KUBECONFIG apply -f your-deployment.yaml'
          sh 'kubectl get no'
          sh 'kubectl version -o json'
-         sh 'kubectl create namespace argocd'
+         //sh 'kubectl create namespace argocd'
          sh 'kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml'
          sh 'kubectl get pods -n argocd'
        }
