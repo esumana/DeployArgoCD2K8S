@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+  }
   stages {
     stage('Docker Build') {
       steps {
@@ -44,7 +47,7 @@ pipeline {
          sh 'kubectl get pods -n argocd'
          sh 'kubectl apply -f argocd-nginx-ingress.yaml'
          //sh 'kubectl delete -f argocd-nginx-ingress.yaml'
-         sh 'sudo kubectl port-forward -n argocd service/argocd-server 443:443'
+         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo kubectl port-forward -n argocd service/argocd-server 443:443'
        }
      }
     }
