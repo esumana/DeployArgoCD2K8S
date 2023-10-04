@@ -42,7 +42,8 @@ pipeline {
          sh 'kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -'
          sh 'kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml'
          sh 'kubectl get pods -n argocd'
-         sh 'kubectl apply -f argocd-nginx-ingress.yaml'
+         //sh 'kubectl apply -f argocd-nginx-ingress.yaml'
+         sh 'kubectl delete -f argocd-nginx-ingress.yaml'
        }
      }
     }
