@@ -24,7 +24,7 @@ pipeline {
    }
     stage('Apply Kubernetes Files') {
       steps {
-          withKubeConfig([credentialsId: 'JENKINS-CONNECT-TO-REMOTE-K8S']) {
+          withKubeConfig([credentialsId: 'jenkins2aks-home']) {
           sh 'echo Apply Kubernetes Files'
           //sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
           // //sh 'kubectl apply -f service.yaml'
@@ -33,7 +33,7 @@ pipeline {
    }
    stage('Deploy to Kubernetes') {
      steps {
-       withCredentials([file(credentialsId: 'JENKINS-CONNECT-TO-REMOTE-K8S', variable: 'KUBECONFIG')]) {
+       withCredentials([file(credentialsId: 'jenkins2aks-home', variable: 'KUBECONFIG')]) {
          echo 'Deploy to Kubernetes'
          // Use the KUBECONFIG variable to interact with Kubernetes
          //sh 'kubectl --kubeconfig=$KUBECONFIG apply -f your-deployment.yaml'
