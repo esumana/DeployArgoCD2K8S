@@ -53,7 +53,7 @@ pipeline {
    stage("Portforwarding") {
      steps {
        sh "echo Portforwarding..."
-       sh 'echo monza1 | sudo -S kubectl port-forward -n argocd service/argocd-server 443:443'
+       sh 'echo monza1 | sudo kubectl port-forward -n argocd service/argocd-server 443:443'
      }
    }
   }
