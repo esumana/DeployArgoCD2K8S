@@ -44,7 +44,7 @@ pipeline {
          sh 'kubectl get pods -n argocd'
          sh 'kubectl apply -f argocd-nginx-ingress.yaml'
          //sh 'kubectl delete -f argocd-nginx-ingress.yaml'
-         sh 'kubectl port-forward -n argocd service/argocd-server 443:443'
+         sh 'sudo kubectl port-forward -n argocd service/argocd-server 443:443'
        }
      }
     }
