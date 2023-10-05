@@ -3,15 +3,15 @@ kind: Ingress
 metadata:
   name: argocd-server-ingress
   namespace: argocd
-#//  annotations:
-#//    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-#//    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   tls:
     - hosts:
       - argocd.ekong.xyz
       # This assumes tls-secret exists and the SSL
-      # certificate contains a CN for foo.bar.com
+      # certificate contains a CN for argocd.ekong.xyz
       secretName: tls-secret
   ingressClassName: nginx
   rules:
