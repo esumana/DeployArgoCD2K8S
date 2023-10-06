@@ -4,7 +4,7 @@ metadata:
   name: tls-secret
   namespace: argocd
 type: kubernetes.io/tls
-# works
+# workss
 data:
   server.crt: |
        ekong.xyz-b64.crt
