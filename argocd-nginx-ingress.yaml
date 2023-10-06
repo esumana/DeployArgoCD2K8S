@@ -31,7 +31,7 @@ spec:
       secretName: tls-secret
   ingressClassName: nginx
   rules:
-  - host: *.ekong.xyz
+  - host: argocd.ekong.xyz
     http:
       paths:
       - path: /
