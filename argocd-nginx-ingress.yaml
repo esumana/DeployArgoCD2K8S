@@ -25,7 +25,7 @@ metadata:
 spec:
   tls:
     - hosts:
-      - *.ekong.xyz
+      - argocd.ekong.xyz
       # This assumes tls-secret exists and the SSL
       # certificate contains a CN for argocd.ekong.xyz
       secretName: tls-secret
