@@ -6,9 +6,9 @@ metadata:
 type: kubernetes.io/tls
 data:
   server.crt: |
-       ekong.xyz.crt
+       ekong.xyz-b64.crt
   server.key: |
-       ekong.xyz.key
+       ekong.xyz-b64.key
 
 ---
 
