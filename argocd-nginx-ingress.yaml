@@ -18,8 +18,8 @@ spec:
             name: argocd-server
             port:
               name: https
-    host: argocd.ekong.xyz
+    host: "argocd.ekong.xyz"
   tls:
   - hosts:
-    - argocd.ekong.xyz
+    - "argocd.ekong.xyz"
     secretName: tls-secret
