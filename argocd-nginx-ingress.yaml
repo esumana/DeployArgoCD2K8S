@@ -19,21 +19,12 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-#    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-#    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
-  tls:
-    - hosts:
-      - "*.ekong.xyz"
-      # This assumes tls-secret exists and the SSL
-      # certificate contains a CN for argocd.ekong.xyz
-      secretName: tls-secret
   ingressClassName: nginx
   rules:
-  - host: "argocd.ekong.xyz"
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -41,4 +32,27 @@ spec:
           service:
             name: argocd-server
             port:
-              number: 80
+              name: http
+    host: argocd.ekong.xyz
+  tls:
+  - hosts:
+    - argocd.ekong.xyz
+    secretName: tls-secret
+
+#spec:
+#  tls:
+#    - hosts:
+#      - "*.ekong.xyz"
+#      # This assumes tls-secret exists and the SSL
+#      # certificate contains a CN for argocd.ekong.xyz
+#      secretName: tls-secret    
+#  - host: "argocd.ekong.xyz"
+#    http:
+#      paths:
+#      - path: /
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: argocd-server
+#            port:
+#              number: 80
