@@ -1,22 +1,7 @@
-#apiVersion: v1
-#kind: Secret
-#metadata:
-#  name: tls-secret
-#  namespace: argocd
-#type: kubernetes.io/tls
-# workss
-#data:
-#  server.crt: |
-#       encoded.crt
-#  server.key: |
-#       encoded.key
-#
-#---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server-ingress
+  name: argocd-server-http-ingress
   namespace: argocd
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -37,22 +22,31 @@ spec:
   tls:
   - hosts:
     - argocd.ekong.xyz
-    secretName: tls-secret
+    secretName: argocd-ingress-http
 
-#spec:
-#  tls:
-#    - hosts:
-#      - "*.ekong.xyz"
-#      # This assumes tls-secret exists and the SSL
-#      # certificate contains a CN for argocd.ekong.xyz
-#      secretName: tls-secret    
-#  - host: "argocd.ekong.xyz"
-#    http:
-#      paths:
-#      - path: /
-#        pathType: Prefix
-#        backend:
-#          service:
-#            name: argocd-server
-#            port:
-#              number: 80
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-grpc-ingress
+  namespace: argocd
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: https
+    host: grpc.argocd.ekong.xyz
+  tls:
+  - hosts:
+    - grpc.argocd.ekong.xyz
+    secretName: argocd-ingress-grpc
