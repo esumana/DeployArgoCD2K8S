@@ -22,4 +22,4 @@ spec:
   tls:
   - hosts:
     - "*.ekong.xyz"
-    secretName: tls-secret
+    secretName: argocd-ingress-http
