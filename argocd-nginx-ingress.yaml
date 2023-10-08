@@ -23,7 +23,7 @@ spec:
   tls:
   - hosts:
     - "*.ekong.xyz"
-    secretName: argocd-ingress-http
+    secretName: argocd-server-tls
 
 ---
 
@@ -50,4 +50,4 @@ spec:
   tls:
   - hosts:
     - grpc.argocd.ekong.xyz
-    secretName: argocd-ingress-grpc
+    secretName: argocd-server-tls
